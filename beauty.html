@@ -232,7 +232,7 @@
           We're building something for the woman who knows her worth. Get early access — be the first to know when we launch.
         </p>
         <div class="reveal">
-          <form class="newsletter__form" action="https://formspree.io/f/xvzvllvv" method="POST" novalidate>
+          <form class="newsletter__form" novalidate>
             <input type="email" name="email" class="newsletter__input" placeholder="Your email address" aria-label="Email address for early access" required>
             <button type="submit" class="newsletter__submit">Notify Me</button>
           </form>
@@ -365,31 +365,7 @@
         reveals.forEach(el => el.classList.add('visible'));
       }
 
-      /* Newsletter form */
-      document.querySelectorAll('.newsletter__form').forEach(form => {
-        form.addEventListener('submit', e => {
-          e.preventDefault();
-          const email = form.querySelector('input[type="email"]').value;
-          if (!email) return;
-          const successEl = form.parentElement.querySelector('.newsletter__success');
-          form.style.display = 'none';
-          if (successEl) successEl.style.display = 'block';
-        });
-      });
-
-      /* Footer mini-form */
-      document.querySelectorAll('.footer__mini-form').forEach(wrap => {
-        const btn   = wrap.querySelector('button');
-        const input = wrap.querySelector('input[type="email"]');
-        if (!btn || !input) return;
-        btn.addEventListener('click', () => {
-          if (!input.value) return;
-          input.value = '';
-          btn.textContent = 'Subscribed ✓';
-          btn.style.background = '#9A7A50';
-          btn.disabled = true;
-        });
-      });
+      /* Newsletter + footer forms are wired in js/courier.js (The Courier). */
 
       /* Smooth scroll for anchors */
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -469,5 +445,6 @@
   })();
   </script>
 
+  <script src="js/courier.js"></script>
 </body>
 </html>

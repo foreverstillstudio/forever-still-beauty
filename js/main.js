@@ -70,40 +70,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* --------------------------------------------------
-     5. NEWSLETTER FORM
+     5 + 6. NEWSLETTER / FOOTER FORMS
+     Lead capture now lives in js/courier.js (posts to The
+     Courier). Do not re-wire those forms here or they double-fire.
   -------------------------------------------------- */
-  document.querySelectorAll('.newsletter__form').forEach(form => {
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-      const email = form.querySelector('input[type="email"]').value;
-      if (!email) return;
-
-      // REPLACE: Send 'email' to your email platform (Mailchimp, Klaviyo, etc.)
-      // Example: fetch('/subscribe', { method: 'POST', body: JSON.stringify({ email }) })
-
-      const successEl = form.parentElement.querySelector('.newsletter__success');
-      form.style.display = 'none';
-      if (successEl) successEl.style.display = 'block';
-    });
-  });
-
-  /* --------------------------------------------------
-     6. FOOTER MINI-FORM (basic inline handler)
-  -------------------------------------------------- */
-  document.querySelectorAll('.footer__mini-form').forEach(wrap => {
-    const btn   = wrap.querySelector('button');
-    const input = wrap.querySelector('input[type="email"]');
-    if (!btn || !input) return;
-
-    btn.addEventListener('click', () => {
-      if (!input.value) return;
-      // REPLACE: Send to your email platform
-      input.value = '';
-      btn.textContent = 'Subscribed ✓';
-      btn.style.background = '#9A7A50';
-      btn.disabled = true;
-    });
-  });
 
   /* --------------------------------------------------
      7. CONTACT FORM
