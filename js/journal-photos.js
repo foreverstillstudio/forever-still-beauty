@@ -7,6 +7,12 @@
   var entries = document.querySelectorAll('.journal__entry');
   if (!entries.length || !window.fetch) return;
 
+  var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  // Instagram sends e.g. "2026-11-09T15:04:05+0000"; add the colon some browsers need.
+  function month(ts) {
+    var t = ts ? Date.parse(String(ts).replace(/([+-]\d\d)(\d\d)$/, '$1:$2')) : NaN;
+    return isNaN(t) ? 'On Instagram' : MONTHS[new Date(t).getMonth()];
+  }
   function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
 
   fetch(API + '/api/public/businesses/' + SLUG + '/ig-photos?limit=' + entries.length)
@@ -24,7 +30,7 @@
         frame.innerHTML = p.link
           ? '<a href="' + esc(p.link) + '" target="_blank" rel="noopener" aria-label="View this post on Instagram (opens in a new tab)">' + img + '</a>'
           : img;
-        entry.querySelector('.journal__meta').textContent = 'On Instagram · ' + n;
+        entry.querySelector('.journal__meta').textContent = month(p.timestamp) + ' · ' + n;
         var cap = entry.querySelector('.journal__caption');
         if (p.caption) cap.textContent = p.caption; else cap.remove();
       });
