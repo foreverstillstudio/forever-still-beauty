@@ -18,4 +18,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://www.foreverstillbeauty.com/sitemap.xml
+Sitemap: https://foreverstillbeauty.com/sitemap.xml
